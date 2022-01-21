@@ -42,8 +42,94 @@
         <h1>Applying Linked List to Embedded systems</h1>
     </header>
     <div class="content__body">
-        <p>This content is visible now</p>
+        <p>This is the code</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">// C program to implement
+</span><span style="color:#75715e">// the above approach
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setup</span>()
+{
+  pinMode(LED_BUILTIN,OUTPUT);
+  Serial.begin(<span style="color:#ae81ff">115200</span>);
+}
 
+<span style="color:#75715e">/* structure for a node */</span>
+<span style="color:#66d9ef">struct</span> Node
+{
+    <span style="color:#66d9ef">int</span> data;
+    <span style="color:#66d9ef">struct</span> Node <span style="color:#f92672">*</span>next;
+};
+
+<span style="color:#75715e">/* Function to insert a node at the beginning of a Circular
+</span><span style="color:#75715e">   linked list */</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">push</span>(<span style="color:#66d9ef">struct</span> Node <span style="color:#f92672">**</span>head_ref, <span style="color:#66d9ef">int</span> data)
+{
+    <span style="color:#66d9ef">struct</span> Node <span style="color:#f92672">*</span>ptr1 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">struct</span> Node <span style="color:#f92672">*</span>)malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> Node));
+    <span style="color:#66d9ef">struct</span> Node <span style="color:#f92672">*</span>temp <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>head_ref;
+    ptr1<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">=</span> data;
+    ptr1<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>head_ref;
+
+    <span style="color:#75715e">/* If linked list is not NULL then set the next of last node */</span>
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">*</span>head_ref <span style="color:#f92672">!=</span> NULL)
+    {
+        <span style="color:#66d9ef">while</span> (temp<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">!=</span> <span style="color:#f92672">*</span>head_ref)
+            temp <span style="color:#f92672">=</span> temp<span style="color:#f92672">-&gt;</span>next;
+        temp<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> ptr1;
+    }
+    <span style="color:#66d9ef">else</span>
+        ptr1<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> ptr1; <span style="color:#75715e">/*For the first node */</span>
+
+    <span style="color:#f92672">*</span>head_ref <span style="color:#f92672">=</span> ptr1;
+}
+
+<span style="color:#75715e">/* Function to print nodes in a given Circular linked list */</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">parseList</span>(<span style="color:#66d9ef">struct</span> Node <span style="color:#f92672">*</span>head)
+{
+    <span style="color:#66d9ef">struct</span> Node <span style="color:#f92672">*</span>temp <span style="color:#f92672">=</span> head;
+    <span style="color:#66d9ef">if</span> (head <span style="color:#f92672">!=</span> NULL)
+    {
+        <span style="color:#66d9ef">do</span>
+        {
+            Serial.println(temp<span style="color:#f92672">-&gt;</span>data);
+            digitalWrite(LED_BUILTIN,temp<span style="color:#f92672">-&gt;</span>data);
+            delay(<span style="color:#ae81ff">1000</span>);
+            temp <span style="color:#f92672">=</span> temp<span style="color:#f92672">-&gt;</span>next;
+        }
+        <span style="color:#66d9ef">while</span> (temp <span style="color:#f92672">!=</span> head);
+    }
+}
+
+<span style="color:#75715e">/* Driver program to test above functions */</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">loop</span>()
+{
+  
+    <span style="color:#75715e">/* Initialize lists as empty */</span>
+    <span style="color:#66d9ef">struct</span> Node <span style="color:#f92672">*</span>head <span style="color:#f92672">=</span> NULL;
+
+    <span style="color:#75715e">/* Created linked list will be 1-&gt;0 */</span>
+    push(<span style="color:#f92672">&amp;</span>head, <span style="color:#ae81ff">1</span>);
+    push(<span style="color:#f92672">&amp;</span>head, <span style="color:#ae81ff">0</span>);
+
+    parseList(head);
+
+    
+}
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> led_state[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>};
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setup</span>() {
+  <span style="color:#75715e">// put your setup code here, to run once:
+</span><span style="color:#75715e"></span>  pinMode(LED_BUILTIN,OUTPUT);
+}
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">loop</span>() {
+  <span style="color:#75715e">// put your main code here, to run repeatedly:
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">++</span>)
+  {
+    digitalWrite(LED_BUILTIN,led_state[i]);
+    delay(<span style="color:#ae81ff">1000</span>);
+  }
+}
+</code></pre></div>
     </div>
     <footer class="content__footer"></footer>
 

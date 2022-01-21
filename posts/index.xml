@@ -14,7 +14,8 @@
       <pubDate>Tue, 18 Jan 2022 00:17:59 -0800</pubDate>
       
       <guid>https://sundar19.github.io/posts/linked_list/</guid>
-      <description>This content is visible now</description>
+      <description>This is the code
+// C program to implement // the above approach #include&amp;lt;stdio.h&amp;gt;#include&amp;lt;stdlib.h&amp;gt; void setup() { pinMode(LED_BUILTIN,OUTPUT); Serial.begin(115200); } /* structure for a node */ struct Node { int data; struct Node *next; }; /* Function to insert a node at the beginning of a Circular linked list */ void push(struct Node **head_ref, int data) { struct Node *ptr1 = (struct Node *)malloc(sizeof(struct Node)); struct Node *temp = *head_ref; ptr1-&amp;gt;data = data; ptr1-&amp;gt;next = *head_ref; /* If linked list is not NULL then set the next of last node */ if (*head_ref !</description>
     </item>
     
   </channel>
