@@ -10,12 +10,14 @@
     <lastBuildDate>Tue, 18 Jan 2022 00:17:59 -0800</lastBuildDate><atom:link href="https://sundar19.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Applying Linked List to Embedded systems</title>
-      <link>https://sundar19.github.io/posts/linked_list/</link>
+      <link>https://sundar19.github.io/posts/content/</link>
       <pubDate>Tue, 18 Jan 2022 00:17:59 -0800</pubDate>
       
-      <guid>https://sundar19.github.io/posts/linked_list/</guid>
-      <description>This is the code
-// C program to implement // the above approach #include&amp;lt;stdio.h&amp;gt;#include&amp;lt;stdlib.h&amp;gt; void setup() { pinMode(LED_BUILTIN,OUTPUT); Serial.begin(115200); } /* structure for a node */ struct Node { int data; struct Node *next; }; /* Function to insert a node at the beginning of a Circular linked list */ void push(struct Node **head_ref, int data) { struct Node *ptr1 = (struct Node *)malloc(sizeof(struct Node)); struct Node *temp = *head_ref; ptr1-&amp;gt;data = data; ptr1-&amp;gt;next = *head_ref; /* If linked list is not NULL then set the next of last node */ if (*head_ref !</description>
+      <guid>https://sundar19.github.io/posts/content/</guid>
+      <description>Before diving into our application , we need to know about Linked List and Arrays in general.
+Array Array is a type of data structure which can be used when we know that only a fixed memory space is required. if we consider an integer array of 3 elements
+int a[3] ==&amp;gt; 3*4 = 12 bytes of memory (int datatype requires 4 bytes of memory)
+In case of an integer array of size 50</description>
     </item>
     
   </channel>
